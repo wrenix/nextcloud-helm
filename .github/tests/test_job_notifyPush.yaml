@@ -1,0 +1,35 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: test-nextcloud-notify-push
+  namespace: nextcloud
+spec:
+  template:
+    metadata:
+      name: test-nextcloud-notify-push
+    spec:
+      initContainers:
+        - name: 51-notify-push
+          image: curlimages/curl
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+              curl \
+                -s \
+                -w "%{http_code}" \
+                -u admin:changeme \
+                 http://nextcloud.nextcloud.svc.cluster.local:8080/apps/notify_push/test/remote
+              echo "done"
+      containers:
+        - name: final
+          image: curlimages/curl
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+              echo "All tests run successfull (initContainer in given order)"
+      restartPolicy: Never
