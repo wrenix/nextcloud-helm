@@ -22,6 +22,11 @@ server {
     listen {{ .Values.nginx.containerPort }};
     {{- end }}
 
+    # fix accesslog of nginx-container:
+    # https://github.com/nextcloud/helm/issues/675
+    real_ip_header    X-Forwarded-For;
+    real_ip_recursive on;
+
     # Path to the root of your installation
     root /var/www/html;
 
