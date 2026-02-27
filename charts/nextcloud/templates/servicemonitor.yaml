@@ -25,7 +25,7 @@ spec:
       - {{ $.Release.Namespace | quote }}
     {{- end }}
   endpoints:
-    - port: metrics
+    - port: http
       path: "/metrics"
       {{- with .interval }}
       interval: {{ . }}

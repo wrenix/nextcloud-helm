@@ -25,7 +25,7 @@ spec:
   selector:
     {{- include "nextcloud.selectorLabels"  ( dict "component" "metrics"  "rootContext" $ ) | nindent 4 }}
   ports:
-    - name: metrics
+    - name: http
       port: 9100
       targetPort: metrics
 {{- end }}

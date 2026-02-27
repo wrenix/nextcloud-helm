@@ -25,10 +25,10 @@ spec:
   selector:
     {{- include "nextcloud.selectorLabels"  ( dict "component" "notify-push"  "rootContext" $ ) | nindent 4 }}
   ports:
-    - name: http
+    - name: http-websocket
       port: 80
       targetPort: http
-    - name: metrics
+    - name: http
       port: 9100
       targetPort: metrics
 {{- end }}

@@ -42,7 +42,7 @@ spec:
               service:
                 name: {{ template "nextcloud.fullname" . }}-notify-push
                 port:
-                  name: http
+                  name: http-websocket
           {{- end }}
   {{- with .Values.ingress.tls }}
   tls:
